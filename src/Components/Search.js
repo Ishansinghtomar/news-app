@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import News from './News'
 import { Link } from 'react-router-dom'
 export class Search extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            searchstate: " ",
-            news: ""
+            searchstate: "latest",
+            news: false,
+
         }
     }
 
@@ -15,18 +16,22 @@ export class Search extends Component {
     }
 
     search = () => {
-        this.setState({ news: <News key="search" country="in" category="search" search={this.state.searchstate} /> })
+        this.setState({ news: true })
+this.props.searchkey(this.state.searchstate)
     }
-    
+
     render() {
 
         return (
-            <div>
+
+
+            <div className="text-center">
                 <h1>News Search</h1>
                 <input type="text" onChange={(event) => this.handle(event.target.value)} ></input>
-                <Link type="button" className="btn btn-primary" to="/search" onClick={this.search}>Search</Link>
-                {this.state.news}
+                <Link  to ="/search" type="button" className="btn btn-primary" onClick={this.search}>Search</Link>
+               
             </div>
+
         )
 
     }

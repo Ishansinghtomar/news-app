@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NewsItem from "./NewsItem"
 import Wait from './Wait';
 import PropTypes from 'prop-types'
-
+import './NewsItem.css'
 
 export default class News extends Component {
 
@@ -47,7 +47,7 @@ export default class News extends Component {
     apiCall() {
         this.setState({ loading: true })
         if (this.props.category === "search") {
-            var url = ` https://newsapi.org/v2/everything?q=${this.props.search}&from=2021-12-21&sortBy=popularity&apiKey=4cee6225d8db44f3a4e3f095c5705619`
+            var url = ` https://newsapi.org/v2/everything?q=${this.props.search}&from=2021-12-21&sortBy=popularity&apiKey=94d763c755364cd58c2f1b6fcf16bda3`
         } 
         fetch(url)
         .then(res => res.json())
@@ -58,11 +58,11 @@ export default class News extends Component {
     componentDidMount() {
         this.setState({ loading: true })
         if (this.props.category === "search") {
-            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=4cee6225d8db44f3a4e3f095c5705619`
+            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=94d763c755364cd58c2f1b6fcf16bda3`
         } else {
-            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=4cee6225d8db44f3a4e3f095c5705619&page=${this.state.page}&pageSize=15`
+            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=94d763c755364cd58c2f1b6fcf16bda3&page=${this.state.page}&pageSize=15`
         }
-        //let data =await fetch("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=4cee6225d8db44f3a4e3f095c5705619")
+        //let data =await fetch("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=94d763c755364cd58c2f1b6fcf16bda3")
         //let parsejson=await data.json();
         //this.setState({articles:parsejson.articles})
         fetch(url)
@@ -73,16 +73,16 @@ export default class News extends Component {
     }
 
     render() {
-
+console.log("helll from re")
         return (
-            <div className="container my-3">
+            <div className="container-Outer">
                 <h2 className="text-center">Top Headlines From {(this.props.category).toUpperCase()} Category</h2>
                 {this.state.loading && <Wait />}
-                <div className="row">
-                    {!this.state.loading && this.state.articles.map((element) => {
-                        return (<div className="col-md-4" key={element.url}>
-                            <NewsItem title={element.title} description={element.description} image={element.urlToImage} compurl={element.url} author={element.author} date={element.publishedAt} />
-                        </div>)
+                <div className="listing">
+                    {!this.state.loading && this.state.articles.map((element,index) => {
+                        return (
+                            <NewsItem key={index} title={element.title} description={element.description} image={element.urlToImage} compurl={element.url} author={element.author} date={element.publishedAt} />
+                    )
                     })}
                 </div>
                 <div className="container d-flex justify-content-between" >
@@ -95,7 +95,11 @@ export default class News extends Component {
     }
     nextClick = () => {
         this.setState({ loading: true })
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b3542dfc5d6447f29b4e56010eeeb0db&page=${this.state.page + 1}&pageSize=15`
+        if (this.props.category === "search") {
+            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=94d763c755364cd58c2f1b6fcf16bda3`
+        } else {
+            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=94d763c755364cd58c2f1b6fcf16bda3&page=${this.state.page}&pageSize=15`
+        }
 
         fetch(url)
             .then(res => res.json())
@@ -103,7 +107,11 @@ export default class News extends Component {
     }
     prevClick = () => {
         this.setState({ loading: true })
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b3542dfc5d6447f29b4e56010eeeb0db&page=${this.state.page - 1}&pageSize=15`
+        if (this.props.category === "search") {
+            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=94d763c755364cd58c2f1b6fcf16bda3`
+        } else {
+            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=94d763c755364cd58c2f1b6fcf16bda3&page=${this.state.page}&pageSize=15`
+        }
 
         fetch(url)
             .then(res => res.json())
