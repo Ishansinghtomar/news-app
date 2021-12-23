@@ -68,7 +68,7 @@ export default class News extends Component {
         fetch(url)
             .then(res => res.json())
             .catch(err => console.log("Wdasdsadsad", err))
-            .then(data => this.setState({ articles: data.articles, totalResult: data.totalResults, loading: false }))
+            .then(data => this.setState({ articles: data.articles,page:this.state.page+1 ,totalResult: data.totalResults, loading: false }))
 
     }
 
@@ -86,8 +86,9 @@ console.log("helll from re")
                     })}
                 </div>
                 <div className="container d-flex justify-content-between" >
-                    <button disabled={this.state.page <= 1} type="button" className="btn btn-primary" onClick={this.prevClick}>&larr; Previous</button>
-                    <button disabled={this.state.page >= Math.ceil(this.state.totalResult / 15)} type="button" className="btn btn-primary" onClick={this.nextClick}>Next &rarr;</button>
+                   {this.state.loading ? "":<button disabled={this.state.page <= 1} type="button" className="btn btn-primary" onClick={this.prevClick}>&larr; Previous</button>}
+                   {this.state.loading ? "":  <button disabled={this.state.page >= Math.ceil(this.state.totalResult / 15)} type="button" className="btn btn-primary" onClick={this.nextClick}>Next &rarr;</button>}
+
                 </div>
             </div>
 
