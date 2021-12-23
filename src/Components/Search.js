@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import News from './News'
 import { Link } from 'react-router-dom'
+import {FaSearchengin} from 'react-icons/fa'
 export class Search extends Component {
     constructor(props) {
         super(props)
@@ -26,10 +27,10 @@ this.props.searchkey(this.state.searchstate)
 
 
             <div className="text-center">
-                <h1>News Search</h1>
-                <input type="text" onChange={(event) => this.handle(event.target.value)} ></input>
-                <Link  to ="/search" type="button" className="btn btn-primary" onClick={this.search}>Search</Link>
-               
+
+                <input  placeholder=" News Search"className=" search-bar" type="text" onChange={(event) => this.handle(event.target.value)} ></input>
+                <Link  to ="/search" type="button" className="search-button" onClick={this.search}><FaSearchengin/></Link>
+
             </div>
 
         )
