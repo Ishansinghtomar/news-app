@@ -47,7 +47,7 @@ export default class News extends Component {
     apiCall() {
         this.setState({ loading: true })
         if (this.props.category === "search") {
-            var url = ` https://newsapi.org/v2/everything?q=${this.props.search}&from=2021-12-21&sortBy=popularity&apiKey=94d763c755364cd58c2f1b6fcf16bda3`
+            var url = ` https://newsapi.org/v2/everything?q=${this.props.search}&from=2021-12-21&sortBy=popularity&apiKey=19aaf03db0794d309a0c06c19ba61e4c${this.state.page}&pageSize=15`
         } 
         fetch(url)
         .then(res => res.json())
@@ -58,11 +58,11 @@ export default class News extends Component {
     componentDidMount() {
         this.setState({ loading: true })
         if (this.props.category === "search") {
-            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=94d763c755364cd58c2f1b6fcf16bda3`
+            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=19aaf03db0794d309a0c06c19ba61e4c&page=${this.state.page}&pageSize=15`
         } else {
-            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=94d763c755364cd58c2f1b6fcf16bda3&page=${this.state.page}&pageSize=15`
+            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=19aaf03db0794d309a0c06c19ba61e4c&page=${this.state.page}&pageSize=15`
         }
-        //let data =await fetch("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=94d763c755364cd58c2f1b6fcf16bda3")
+        //let data =await fetch("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=19aaf03db0794d309a0c06c19ba61e4c")
         //let parsejson=await data.json();
         //this.setState({articles:parsejson.articles})
         fetch(url)
@@ -76,7 +76,7 @@ export default class News extends Component {
 console.log("helll from re")
         return (
             <div className="container-Outer">
-                <h2 className="text-center">Top Headlines From {(this.props.category).toUpperCase()} Category</h2>
+                <h2 className="text-center"style={{fontWeight:"bold"}}>TOP HEADLINES FROM {(this.props.category).toUpperCase()} CATEGORY</h2><br/>
                 {this.state.loading && <Wait />}
                 <div className="listing">
                     {!this.state.loading && this.state.articles.map((element,index) => {
@@ -94,11 +94,14 @@ console.log("helll from re")
         )
     }
     nextClick = () => {
+
+
         this.setState({ loading: true })
         if (this.props.category === "search") {
-            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=94d763c755364cd58c2f1b6fcf16bda3`
+            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=19aaf03db0794d309a0c06c19ba61e4c&page=${this.state.page}&pageSize=15`
         } else {
-            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=94d763c755364cd58c2f1b6fcf16bda3&page=${this.state.page}&pageSize=15`
+            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=19aaf03db0794d309a0c06c19ba61e4c&page=${this.state.page}&pageSize=15`
+
         }
 
         fetch(url)
@@ -108,9 +111,9 @@ console.log("helll from re")
     prevClick = () => {
         this.setState({ loading: true })
         if (this.props.category === "search") {
-            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=94d763c755364cd58c2f1b6fcf16bda3`
+            var url = ` https://newsapi.org/v2/everything?q=${this.state.search}&from=2021-12-21&sortBy=popularity&apiKey=19aaf03db0794d309a0c06c19ba61e4c&page=${this.state.page}&pageSize=15`
         } else {
-            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=94d763c755364cd58c2f1b6fcf16bda3&page=${this.state.page}&pageSize=15`
+            url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=19aaf03db0794d309a0c06c19ba61e4c&page=${this.state.page}&pageSize=15`
         }
 
         fetch(url)

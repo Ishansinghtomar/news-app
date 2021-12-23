@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import News from './News'
 import { Link } from 'react-router-dom'
 import {FaSearchengin} from 'react-icons/fa'
 export class Search extends Component {
