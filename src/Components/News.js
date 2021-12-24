@@ -19,15 +19,7 @@ export default class News extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            articles: [{
-                title:"SADSA",
-                description:"{ element.description }",
-                image:"{ element.urlToImage }",
-                compurl:"{ element.url }",
-                author:"{ element.author }",
-                date:"{ element.publishedAt }"
-
-            }],  //this.articles,
+            articles: [],  //this.articles,
             loading: false,
             page: 1,
             totalResult: 0,
